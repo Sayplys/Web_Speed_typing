@@ -1,9 +1,16 @@
 const startTime = 60
 const timeVariation = 100
-const texts = ['Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible. The long shelf life is due to its low moisture content and acidic pH, creating an inhospitable environment for bacteria and microorganisms.', 
-"In space, there's a giant diamond star named BPM 37093, located 50 light-years away from Earth. Dubbed 'Lucy' after the Beatles song 'Lucy in the Sky with Diamonds,' it's a crystallized white dwarf with a core of carbon and oxygen, estimated to be ten billion trillion trillion carats, making it the largest diamond ever discovered.",
-"Quantum computers can perform complex calculations at unimaginable speeds due to the principles of superposition and entanglement. Unlike classical bits, which can only exist in states of 0 or 1, quantum bits (qubits) can exist in both states simultaneously, exponentially increasing computational power. This enables quantum computers to solve certain problems much faster than traditional computers."]
+const shortTexts = ["Bananas are berries, but strawberries aren't. Botanical classifications can surprise;",
+                    "Octopuses have three hearts. Two pump blood to the gills, and one pumps it to the rest of the body.",
+                    "The shortest war in history lasted just 38 to 45 minutes between Britain and Zanzibar on August 27, 1896."    
+                    ]
 
+const longTexts = ['Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible. The long shelf life is due to its low moisture content and acidic pH, creating an inhospitable environment for bacteria and microorganisms.', 
+                    "In space, there's a giant diamond star named BPM 37093, located 50 light-years away from Earth. Dubbed 'Lucy' after the Beatles song 'Lucy in the Sky with Diamonds,' it's a crystallized white dwarf with a core of carbon and oxygen, estimated to be ten billion trillion trillion carats, making it the largest diamond ever discovered.",
+                    "Quantum computers can perform complex calculations at unimaginable speeds due to the principles of superposition and entanglement. Unlike classical bits, which can only exist in states of 0 or 1, quantum bits (qubits) can exist in both states simultaneously, exponentially increasing computational power. This enables quantum computers to solve certain problems much faster than traditional computers."
+                    ]
+
+var choicedTexts = longTexts
 var timer = startTime
 var isGameRunning = false
 var words = 1
@@ -16,7 +23,8 @@ const targetTextElement = $("#target-text")
 const textInputElement = $("#text-input")
 
 function start(){
-    targetTextElement.text(texts[Math.floor(Math.random() * texts.length)])
+    choicedTexts = choiceTexts()
+    targetTextElement.text(choicedTexts[Math.floor(Math.random() * choicedTexts.length)])
     textInputElement.val('')
     timer = startTime
     isGameRunning = true
@@ -24,7 +32,7 @@ function start(){
     wpm = 0
     textMap = []
     targetTextElement.css({
-        "transform": "translateX(" + -(textMap.length) * 10 + "px)",
+        "transform": "translateX(" + -(textMap.length) * 15 + "px)",
     })
     update()
 }
@@ -99,6 +107,16 @@ function calcAcurrancy(){
 function calcPoints(){
     points = wpm * accurancy**3
     $("#points-count").text((points/1000).toFixed())
+}
+
+function choiceTexts(){
+    console.log($("#length-choices").val())
+    switch($("#length-choices").val()){
+        case"short":
+            return shortTexts
+        default:
+            return longTexts
+    }
 }
 
 textInputElement.on("keydown", (value)=>{

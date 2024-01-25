@@ -12,14 +12,21 @@
     <section class="game">
         <input type="text" id="text-input"></input>
         <label id="text-displayer" for="text-input" ><p id="target-text">Press start</p></label>
+        <div class="texts-choices">
+            <h3>Length choices</h3>
+            <select name="choices" id="length-choices">
+                <option value="short">short</option>
+                <option value="long">long</option>
+            </select>
+        </div>
         <label id="start-btn" for="text-input" onclick="start()">Start</label>
         <p class="timer-displayer">TIMER <span id="timer"></span> </p>
         <div class="stats-area">
             <p class="stats">WPM: <span id="wpm-count"></span></p>
             <p class="stats">Acurrancy: <span id="accurancy-count"></span></p>
-            <p class="stats">Points: <span id="points-count"></span></p>
+            <p class="stats">Last score: <span id="points-count"></span></p>
         </div>
-        
+
     </section>
     <script src="index.js"></script>
 </body>
