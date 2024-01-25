@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Speed Typing</title>
 </head>
 <body>
     <header><h1>Speed Typing</h1></header>
     <section class="game">
-        <p class="text"></p>
-        <button class="start-button">Start</button>
-        <p class="countdown">Countdown: <span class="countdown-timer"></span> </p>
-        <p class="tpm">TPM: <span class="tpm-count"></span></p>
+        <p id="target-text">Press start</p>
+        <input type="text" id="text-input"></input>
+        <label for="text-input" onclick="start()">Start</label>
+        <p class="countdown">Countdown: <span id="timer"></span> </p>
+        <p class="wpm">WPM: <span id="wpm-count"></span></p>
     </section>
     <script src="index.js"></script>
 </body>
