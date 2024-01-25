@@ -23,6 +23,9 @@ function start(){
     words = 1
     wpm = 0
     textMap = []
+    targetTextElement.css({
+        "transform": "translateX(" + -(textMap.length) * 10 + "px)",
+    })
     update()
 }
 
@@ -48,7 +51,6 @@ function countdown(){
 
 function compare(){
     var currentIndex = textInputElement.val().length - 1
-
     var input = textInputElement.val()
     var target = targetTextElement.text()
 
@@ -63,10 +65,10 @@ function compare(){
             if(textMap[current] == textMap[current + 1] && current + 1 != textMap.length) continue
 
             if(textMap[current] == true){
-                styledText += '<span style="color: green;">' +  target.substring(last + 1, current + 1) + "</span>"
+                styledText += '<span style="color: #4fb;">' +  target.substring(last + 1, current + 1) + "</span>"
                 targetTextElement.html(styledText)
             }else{
-                styledText += '<span style="color: red;">' +  target.substring(last + 1, current + 1) + "</span>" 
+                styledText += '<span style="color: #a77; text-decoration-line: underline;">' +  target.substring(last + 1, current + 1) + "</span>" 
             }
 
             last = current
@@ -102,14 +104,21 @@ function calcPoints(){
 textInputElement.on("keydown", (value)=>{
     if(isGameRunning){
         if(value.key == "Backspace") {
-        textMap.pop()
-        setTimeout(()=>{compare()},1)
+            if(textInputElement.val()[textMap.length - 1] == " "){
+                words--
+            }
+            textMap.pop()
+            setTimeout(()=>{compare()},1)
         }else if(value.key == " "){
             words++
         }
 
         setTimeout(()=>{compare()},1)
-    }
-    
+
+        targetTextElement.css({
+            "transform": "translateX(" + -(textMap.length) * 10 + "px)",
+        })
+
+    }  
 })
 
