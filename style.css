@@ -78,7 +78,7 @@ body{
 
 .stats-area{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .stats{
@@ -86,6 +86,7 @@ body{
     height: fit-content;
     text-align: center;
     padding: 1rem;
+    margin-inline: 1rem;
     background-color: var(--border);
     border-radius: 1rem;
 }
