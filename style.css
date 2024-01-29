@@ -3,7 +3,7 @@
     --border: #69140E;
     --border-focus: #D58936;
     --button: #A44200;
-    --text: #F2F3AE;
+    --text: #F5F5cE;
 }
 
 
@@ -38,7 +38,8 @@ body{
 
 #text-displayer{
     display: flex;
-    max-width: 100%;
+    margin-inline: auto;
+    max-width: 60%;
     border: 3px solid var(--border);
     border-radius: 1rem;
     padding: 10px;

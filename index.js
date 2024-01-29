@@ -18,32 +18,33 @@ var wpm = 0
 var accurancy = 100
 var points = 0
 var textMap = []
+var interval
 
 const targetTextElement = $("#target-text")
 const textInputElement = $("#text-input")
 
 function start(){
+    isGameRunning = false
+    clearInterval(interval)
+    
     choicedTexts = choiceTexts()
     targetTextElement.text(choicedTexts[Math.floor(Math.random() * choicedTexts.length)])
     textInputElement.val('')
     timer = startTime
-    isGameRunning = true
     words = 1
     wpm = 0
     textMap = []
     targetTextElement.css({
         "transform": "translateX(" + -(textMap.length) * 15 + "px)",
     })
-    update()
 }
 
 function update(){
-    setTimeout(() => {
+    interval = setInterval(() => {
         countdown()
         calcWPM()
-        if(isGameRunning){
-            update()
-            return
+        if(!isGameRunning){
+            clearInterval(interval)
         }
         calcPoints()
     }, timeVariation)
@@ -110,7 +111,6 @@ function calcPoints(){
 }
 
 function choiceTexts(){
-    console.log($("#length-choices").val())
     switch($("#length-choices").val()){
         case"short":
             return shortTexts
@@ -137,6 +137,9 @@ textInputElement.on("keydown", (value)=>{
             "transform": "translateX(" + -(textMap.length) * 10 + "px)",
         })
 
-    }  
+    }else{
+        isGameRunning = true
+        update()
+    }
 })
 
