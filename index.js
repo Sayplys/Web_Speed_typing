@@ -13,6 +13,7 @@ const longTexts = ['Did you know that honey never spoils? Archaeologists have fo
 var choicedTexts = longTexts
 var timer = startTime
 var isGameRunning = false
+var isGamePrepered = false
 var words = 1
 var wpm = 0
 var accurancy = 100
@@ -24,6 +25,7 @@ const targetTextElement = $("#target-text")
 const textInputElement = $("#text-input")
 
 function start(){
+    isGamePrepered = true
     isGameRunning = false
     clearInterval(interval)
     
@@ -67,7 +69,7 @@ function compare(){
         textMap.push(input[currentIndex] == target[currentIndex])
     }
 
-    if(textMap.length == input.length){
+    if(textMap.length === input.length){
         var last = -1
         var styledText = ""
         for(var current = 0; current < textMap.length; current++){
@@ -75,7 +77,6 @@ function compare(){
 
             if(textMap[current] == true){
                 styledText += '<span style="color: #4fb;">' +  target.substring(last + 1, current + 1) + "</span>"
-                targetTextElement.html(styledText)
             }else{
                 styledText += '<span style="color: #a77; text-decoration-line: underline;">' +  target.substring(last + 1, current + 1) + "</span>" 
             }
@@ -130,16 +131,17 @@ textInputElement.on("keydown", (value)=>{
         }else if(value.key == " "){
             words++
         }
-
         setTimeout(()=>{compare()},1)
+        setTimeout(()=>{compare()},10)
 
         targetTextElement.css({
-            "transform": "translateX(" + -(textMap.length) * 10 + "px)",
+            "transform": "translateX(" + -(textMap.length) * 11 + "px)",
         })
-
-    }else{
+    }else if(isGamePrepered){
+        isGamePrepered = false
         isGameRunning = true
         update()
     }
+
 })
 
